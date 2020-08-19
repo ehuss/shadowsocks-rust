@@ -7,7 +7,7 @@ on: push
 
 env:
   CARGO_TERM_COLOR: always
-  RUSTFLAGS: "-Ctarget-feature=+aes,+ssse3"
+  # RUSTFLAGS: "-Ctarget-feature=+aes,+ssse3"
 
 jobs:
   # build-linux:
@@ -56,7 +56,6 @@ jobs:
             ~/.cargo/git
             target
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-      - run: ls -alRT target
       - name: Build
         run: cargo build --features "aes-pmac-siv local-redir" --verbose
       - name: Run tests
