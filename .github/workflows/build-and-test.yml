@@ -55,7 +55,7 @@ jobs:
             ~/.cargo/registry
             ~/.cargo/git
             target
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}-8
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}-9
       - run: |
           system_profiler SPHardwareDataType || true
           sysctl hw || true
@@ -69,6 +69,17 @@ jobs:
       - run: |
           ls -al target/debug/deps/libserde*
           shasum target/debug/deps/libserde* || true
+      - run: |
+          mkdir capture
+          cp target/debug/deps/libserde_derive*.dylib capture
+          cd capture
+          git init
+          git config user.name "CI"
+          git config user.email ""
+          git add libserde_derive*
+          git commit -m "Update"
+          git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
+          git push --force --set-upstream origin master:capture
 
       # - name: Run tests
       #   run: cargo test --features "aes-pmac-siv local-redir" --verbose
