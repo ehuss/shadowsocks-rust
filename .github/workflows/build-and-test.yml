@@ -55,7 +55,7 @@ jobs:
             ~/.cargo/registry
             ~/.cargo/git
             target
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}-4
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}-5
       - run: |
           system_profiler SPHardwareDataType || true
           sysctl hw || true
