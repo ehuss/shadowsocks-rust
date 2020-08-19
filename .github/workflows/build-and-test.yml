@@ -55,13 +55,16 @@ jobs:
             ~/.cargo/registry
             ~/.cargo/git
             target
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}-5
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}-6
       - run: |
           system_profiler SPHardwareDataType || true
           sysctl hw || true
           rustc -Vv
           cargo -Vv
       - name: Build
+        run: cargo build --features "aes-pmac-siv" --verbose
+      - run: touch src/lib.rs
+      - name: Build2
         run: cargo build --features "aes-pmac-siv" --verbose
       # - name: Run tests
       #   run: cargo test --features "aes-pmac-siv local-redir" --verbose
