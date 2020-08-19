@@ -1,6 +1,6 @@
 //! shadowsocks is a fast tunnel proxy that helps you bypass firewalls.
 //!
-//! Small change.
+//! Small change2.
 //!
 //! Currently it supports SOCKS5 and HTTP Proxy protocol.
 //!
