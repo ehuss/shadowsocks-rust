@@ -56,6 +56,11 @@ jobs:
             ~/.cargo/git
             target
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}-4
+      - run: |
+          system_profiler SPHardwareDataType || true
+          sysctl hw || true
+          rustc -Vv
+          cargo -Vv
       - name: Build
         run: cargo build --verbose
       # - name: Run tests
