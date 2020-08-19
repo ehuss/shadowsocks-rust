@@ -61,15 +61,14 @@ jobs:
           sysctl hw || true
           rustc -Vv
           cargo -Vv
+      - run: |
+          ls -al target/debug/deps/libserde* || true
+          shasum target/debug/deps/libserde* || true
       - name: Build
         run: cargo build --features "aes-pmac-siv" --verbose
       - run: |
-          tar --version
-          tar --posix --use-compress-program zstd -cf cache.tzst -P target
-          rm -rf target
-          tar -xf cache.tzst --use-compress-program "zstd -d"
-      - run: touch src/lib.rs
-      - name: Build2
-        run: cargo build --features "aes-pmac-siv" --verbose
+          ls -al target/debug/deps/libserde*
+          shasum target/debug/deps/libserde* || true
+
       # - name: Run tests
       #   run: cargo test --features "aes-pmac-siv local-redir" --verbose
