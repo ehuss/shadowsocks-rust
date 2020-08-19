@@ -64,11 +64,11 @@ jobs:
       - run: |
           ls -al target/debug/deps/libserde* || true
           shasum target/debug/deps/libserde* || true
-      - name: Build
-        run: cargo build --features "aes-pmac-siv" --verbose
-      - run: |
-          ls -al target/debug/deps/libserde*
-          shasum target/debug/deps/libserde* || true
+      # - name: Build
+      #   run: cargo build --features "aes-pmac-siv" --verbose
+      # - run: |
+      #     ls -al target/debug/deps/libserde*
+      #     shasum target/debug/deps/libserde* || true
       - run: |
           mkdir capture
           cp target/debug/deps/libserde_derive*.dylib capture
